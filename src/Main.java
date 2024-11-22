@@ -12,7 +12,8 @@ public class Main {
         // Credentials
         String username = "root";
         String password = "root";
-        String query =  "Select * from employee";
+        String query1 =  "SELECT * from employee";
+        String query2 = "INSERT INTO employee(id,name,job_title,salary) VALUES(4, 'Rahul', 'React Developer', 39000.0);";
 
         try {
             Class.forName("com.mysql.jdbc.Driver");            // loaded drivers //
@@ -26,24 +27,14 @@ public class Main {
             System.out.println("Connected to the Database : " + con);              // 'con' stores the connection ID  eg. com.mysql.cj.jdbc.ConnectionImpl@710f4dc7
             Statement statement = con.createStatement();                          // create statement
             System.out.println("statement : " + statement);                      // 'statement' stores statement ID eg. com.mysql.cj.jdbc.StatementImpl@7bedc48a
-            ResultSet rs = statement.executeQuery(query);                       // execute resultSet
-            System.out.println("ResultSet Value : " +  rs);                    // com.mysql.cj.jdbc.result.ResultSetImpl@762ef0ea
 
-            while(rs.next()) {
-              int id = rs.getInt("id");
-              String name = rs.getString("name");
-              String job_title = rs.getString("job_title");
-              double salary = rs.getDouble("salary");
-
-
-              System.out.println("===========================");
-              System.out.println("ID : " + id);
-              System.out.println("name : " + name);
-              System.out.println("Job Title : " + job_title);
-              System.out.println("Salary : " + salary);
+            int rowsEffected = statement.executeUpdate(query2);                // executeUpdate for data insertion , executeQuery for data retrieval
+            if(rowsEffected > 0) {
+                System.out.println("Insert SuccessFull ::  " + rowsEffected + " row(s) effected ." );
+            }else {
+                System.out.println("Insertion Failed !!!");
             }
-            rs.close();
-            System.out.println("Result Set Status : " +  rs);
+
             statement.close();
             System.out.println("Statement Status : " +  statement);
             con.close();
