@@ -42,6 +42,12 @@ public class Main {
               System.out.println("Job Title : " + job_title);
               System.out.println("Salary : " + salary);
             }
+            rs.close();
+            System.out.println("Result Set Status : " +  rs);
+            statement.close();
+            System.out.println("Statement Status : " +  statement);
+            con.close();
+            System.out.println("Connection Status : " + con);
 
         } catch (SQLException e) {
             System.err.println("Connection Failed : " + e.getMessage());
